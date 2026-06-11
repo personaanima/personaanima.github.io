@@ -1,0 +1,731 @@
+# HustlForge - Setup automatique
+$folder = "$env:USERPROFILE\Desktop\hustlforge-site"
+New-Item -ItemType Directory -Path $folder -Force | Out-Null
+Set-Location $folder
+
+# index.html
+@'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HustlForge — Forge Your AI-Powered Side Hustle</title>
+<meta name="description" content="Tactical guides, honest tool reviews, and ready-to-use prompts for solo founders building real income with AI.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">⚡ HustlForge</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="articles.html">Blog</a>
+      <a href="newsletter.html">Newsletter</a>
+      <a href="ebook.html">Free Pack</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Forge Your AI-Powered Side Hustle</h1>
+    <p class="lead">Tactical guides, honest tool reviews, and ready-to-use prompts for solo founders building real income with AI in 2026.</p>
+    <a href="ebook.html" class="btn">Get the Free AI Starter Pack</a>
+    <a href="articles.html" class="btn btn-secondary" style="margin-left:0.5rem;">Read the Blog</a>
+  </div>
+</section>
+
+<main class="container">
+  <h2 style="text-align:center; margin: 3rem 0 1rem;">What You'll Find Here</h2>
+  <div class="features">
+    <div class="feature">
+      <h3>🛠️ Tool Reviews</h3>
+      <p>Honest, hands-on reviews of the AI tools that actually move the needle for solo founders. No affiliate fluff.</p>
+    </div>
+    <div class="feature">
+      <h3>💰 Income Playbooks</h3>
+      <p>Step-by-step strategies to build real revenue streams with AI — no gurus, no BS, just tactics.</p>
+    </div>
+    <div class="feature">
+      <h3>⚡ Ready-to-Use Prompts</h3>
+      <p>Battle-tested prompt libraries you can copy, paste, and ship today. Save 10+ hours per week.</p>
+    </div>
+  </div>
+
+  <div class="newsletter-box">
+    <h2>📬 The HustlForge Weekly</h2>
+    <p>1 tactical AI play, 1 tool review, 1 prompt worth stealing. Every Friday. Free forever.</p>
+    <a href="newsletter.html" class="btn">Join Free</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>⚡ <strong>HustlForge</strong> — Built for solo founders.</p>
+    <p style="opacity:0.7;font-size:0.85rem;margin-top:0.5rem;">© 2026 · <a href="articles.html">Blog</a> · <a href="newsletter.html">Newsletter</a> · <a href="ebook.html">Free AI Pack</a></p>
+  </div>
+</footer>
+</body>
+</html>
+'@ | Out-File -FilePath "index.html" -Encoding UTF8
+
+# style.css
+@'
+:root {
+  --bg: #0a0a0f;
+  --bg-soft: #12121a;
+  --bg-card: #1a1a25;
+  --text: #e8e8f0;
+  --text-soft: #9a9ab0;
+  --accent: #7c3aed;
+  --accent-light: #a78bfa;
+  --border: #2a2a3a;
+  --max: 720px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f8f8fc;
+    --bg-card: #ffffff;
+    --text: #1a1a25;
+    --text-soft: #5a5a70;
+    --border: #e8e8f0;
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+
+a { color: var(--accent-light); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--accent); }
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  padding: 1.25rem 0;
+  position: sticky;
+  top: 0;
+  background: rgba(10,10,15,0.85);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+}
+
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 960px;
+}
+
+.logo { font-weight: 800; font-size: 1.25rem; color: var(--text) !important; }
+.site-header nav { display: flex; gap: 1.5rem; }
+.site-header nav a { color: var(--text-soft); font-size: 0.95rem; }
+.site-header nav a:hover { color: var(--accent-light); }
+
+.hero { padding: 5rem 0 3rem; text-align: center; }
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+  background: linear-gradient(135deg, var(--text) 0%, var(--accent-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero .lead { font-size: 1.2rem; color: var(--text-soft); max-width: 600px; margin: 0 auto 2rem; }
+
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: white !important;
+  padding: 0.85rem 1.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all .2s;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.25);
+}
+.btn:hover {
+  background: var(--accent-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 25px rgba(124, 58, 237, 0.35);
+}
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text) !important;
+  box-shadow: none;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0 3rem;
+}
+.feature {
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.feature h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+.feature p { color: var(--text-soft); font-size: 0.95rem; }
+
+.newsletter-box {
+  background: linear-gradient(135deg, var(--accent) 0%, #4f46e5 100%);
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  text-align: center;
+  margin: 3rem 0;
+}
+.newsletter-box h2 { color: white; font-size: 1.8rem; margin-bottom: 0.75rem; }
+.newsletter-box p { margin-bottom: 1.5rem; opacity: 0.95; }
+.newsletter-box .btn { background: white; color: var(--accent) !important; }
+
+main { padding-bottom: 2rem; }
+main h2 { font-size: 1.8rem; font-weight: 700; }
+
+.post-header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+.post-header h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.post-meta { color: var(--text-soft); font-size: 0.9rem; }
+.post-content { padding-bottom: 4rem; }
+.post-content h2 { font-size: 1.7rem; margin: 2.5rem 0 1rem; font-weight: 700; }
+.post-content h3 { font-size: 1.3rem; margin: 2rem 0 0.75rem; font-weight: 700; }
+.post-content p { margin-bottom: 1.25rem; }
+.post-content ul, .post-content ol { margin: 1.25rem 0 1.25rem 1.5rem; }
+.post-content li { margin-bottom: 0.5rem; }
+.post-content strong { color: var(--accent-light); }
+.post-content blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
+  color: var(--text-soft);
+  font-style: italic;
+}
+.post-content code {
+  background: var(--bg-soft);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.list-page { padding: 3rem 0 5rem; }
+.list-page h1 { font-size: 2.5rem; margin-bottom: 2rem; }
+
+.post-grid { display: grid; gap: 1.5rem; margin-top: 2rem; }
+.post-card {
+  display: block;
+  padding: 1.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all .2s;
+  color: var(--text) !important;
+}
+.post-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.post-card h2 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+.post-card p { color: var(--text-soft); margin-bottom: 1rem; }
+.read-more { color: var(--accent-light); font-weight: 600; font-size: 0.9rem; }
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 0;
+  text-align: center;
+  margin-top: 5rem;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .site-header nav { gap: 1rem; }
+  .site-header nav a { font-size: 0.85rem; }
+  .hero { padding: 3rem 0 2rem; }
+  .post-header h1 { font-size: 2rem; }
+  .post-content h2 { font-size: 1.4rem; }
+}
+'@ | Out-File -FilePath "style.css" -Encoding UTF8
+
+# articles.html
+@'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — HustlForge</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">⚡ HustlForge</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="articles.html">Blog</a>
+      <a href="newsletter.html">Newsletter</a>
+      <a href="ebook.html">Free Pack</a>
+    </nav>
+  </div>
+</header>
+
+<section class="list-page">
+  <div class="container">
+    <h1>📚 The Blog</h1>
+    <p style="color:var(--text-soft);font-size:1.1rem;margin-bottom:2rem;">Tactical guides and honest reviews for AI-powered solo founders.</p>
+
+    <div class="post-grid">
+      <a href="article-1.html" class="post-card">
+        <h2>20 Best AI Tools to Start a One-Person Business in 2026</h2>
+        <p>The exact AI stack to run a one-person business — writing, design, video, automation, revenue. From $0 to $33/month lean setup.</p>
+        <span class="read-more">Read article →</span>
+      </a>
+
+      <a href="article-2.html" class="post-card">
+        <h2>How to Make Your First $1,000 with AI as a Solo Founder</h2>
+        <p>A step-by-step playbook to hit $1k/month with AI tools — no audience, no budget, no team. 30 days, real numbers.</p>
+        <span class="read-more">Read article →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>⚡ <strong>HustlForge</strong> — Built for solo founders.</p>
+  </div>
+</footer>
+</body>
+</html>
+'@ | Out-File -FilePath "articles.html" -Encoding UTF8
+
+# article-1.html
+@'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20 Best AI Tools to Start a One-Person Business in 2026 — HustlForge</title>
+<meta name="description" content="The exact AI stack to run a one-person business in 2026.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">⚡ HustlForge</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="articles.html">Blog</a>
+      <a href="newsletter.html">Newsletter</a>
+      <a href="ebook.html">Free Pack</a>
+    </nav>
+  </div>
+</header>
+
+<article class="post">
+  <div class="container">
+    <header class="post-header">
+      <h1>20 Best AI Tools to Start a One-Person Business in 2026</h1>
+      <p class="post-meta">June 11, 2026 · 8 min read</p>
+    </header>
+
+    <div class="post-content">
+      <p>You don'\''t need a team, a co-founder, or venture capital to build a profitable business in 2026. You need <strong>the right AI stack</strong> and the discipline to use it daily.</p>
+
+      <p>After testing 100+ tools across 12 months and running a one-person business on this exact setup, here'\''s the definitive list of the 20 AI tools that actually move the needle.</p>
+
+      <h2>✍️ Writing & Content</h2>
+
+      <h3>1. ChatGPT (GPT-4o) — The Swiss Army Knife</h3>
+      <p><strong>Best for:</strong> Brainstorming, drafting, repurposing content, research.<br>
+      <strong>Pricing:</strong> Free / $20/mo (Plus)<br>
+      The default for a reason.</p>
+
+      <h3>2. Claude (Sonnet 4) — The Long-Form Specialist</h3>
+      <p><strong>Best for:</strong> Long articles, complex analysis, code, nuanced writing.<br>
+      <strong>Pricing:</strong> Free / $20/mo (Pro)</p>
+
+      <h3>3. Jasper — The Marketing Copy Machine</h3>
+      <p><strong>Best for:</strong> Email sequences, ad copy, sales pages.<br>
+      <strong>Pricing:</strong> From $49/mo</p>
+
+      <h2>🎨 Design & Visuals</h2>
+
+      <h3>4. Midjourney v7 — The Gold Standard for Images</h3>
+      <p><strong>Best for:</strong> Hero images, social posts, blog visuals.<br>
+      <strong>Pricing:</strong> From $10/mo</p>
+
+      <h3>5. Canva Magic Studio — The All-in-One</h3>
+      <p><strong>Best for:</strong> Quick graphics, presentations, brand kits.<br>
+      <strong>Pricing:</strong> Free / $13/mo (Pro)</p>
+
+      <h2>🎬 Video & Audio</h2>
+
+      <h3>6. ElevenLabs — The Voice Clone King</h3>
+      <p><strong>Best for:</strong> Voiceovers, podcasts, audiobooks, multilingual content.<br>
+      <strong>Pricing:</strong> From $5/mo</p>
+
+      <h3>7. Descript — Edit Video Like a Doc</h3>
+      <p><strong>Best for:</strong> YouTube videos, podcasts, course creation.<br>
+      <strong>Pricing:</strong> Free / $24/mo (Pro)</p>
+
+      <h2>⚡ Productivity & Automation</h2>
+
+      <h3>8. Notion AI — The Second Brain</h3>
+      <p><strong>Best for:</strong> Notes, project management, knowledge base.<br>
+      <strong>Pricing:</strong> $10/mo add-on</p>
+
+      <h3>9. Make (Integromat) — Automation Powerhouse</h3>
+      <p><strong>Best for:</strong> Connecting 1000+ apps without code.<br>
+      <strong>Pricing:</strong> Free / From $9/mo</p>
+
+      <h2>📧 Sales & Marketing</h2>
+
+      <h3>10. Brevo — The Email Engine</h3>
+      <p><strong>Best for:</strong> Newsletters, transactional emails, automation.<br>
+      <strong>Pricing:</strong> Free up to 300 emails/day</p>
+
+      <h3>11. Kit (ConvertKit) — The Creator'\''s CRM</h3>
+      <p><strong>Best for:</strong> Landing pages, email sequences, creator businesses.<br>
+      <strong>Pricing:</strong> Free up to 1,000 subscribers</p>
+
+      <h2>💻 Coding & Building</h2>
+
+      <h3>12. Cursor — The AI Code Editor</h3>
+      <p><strong>Best for:</strong> Building apps, websites, scripts — even if you don'\''t code.<br>
+      <strong>Pricing:</strong> Free / $20/mo (Pro)</p>
+
+      <h3>13. v0.dev by Vercel — The UI Generator</h3>
+      <p><strong>Best for:</strong> Generating React/Next.js UI from a text prompt.<br>
+      <strong>Pricing:</strong> Free tier available</p>
+
+      <h2>🔍 Research & Data</h2>
+
+      <h3>14. Perplexity Pro — The AI Research Engine</h3>
+      <p><strong>Best for:</strong> Real-time research with citations.<br>
+      <strong>Pricing:</strong> Free / $20/mo (Pro)</p>
+
+      <h3>15. Browse AI — The No-Code Scraper</h3>
+      <p><strong>Best for:</strong> Extracting data from any website.<br>
+      <strong>Pricing:</strong> Free / From $39/mo</p>
+
+      <h2>💡 The Lean Stack ($33/month total)</h2>
+      <ul>
+        <li><strong>Writing:</strong> ChatGPT Plus ($20)</li>
+        <li><strong>Design:</strong> Canva Pro ($13)</li>
+        <li><strong>Email:</strong> Brevo Free ($0)</li>
+        <li><strong>Automation:</strong> Make Free ($0)</li>
+        <li><strong>Research:</strong> Perplexity Free ($0)</li>
+        <li><strong>Editor:</strong> Cursor Free ($0)</li>
+      </ul>
+      <p>That'\''s a complete one-person business toolkit for $33/month.</p>
+
+      <h2>🎯 The Real Secret</h2>
+      <p>The tools don'\''t matter as much as the <strong>system</strong>. Pick 3-5 tools, master them, and build a daily workflow around them.</p>
+
+      <div class="newsletter-box">
+        <h2>📬 Want More Like This?</h2>
+        <p>Get 1 tactical AI play every Friday. Free forever.</p>
+        <a href="newsletter.html" class="btn">Join the Newsletter</a>
+      </div>
+
+      <p style="text-align:center;margin-top:2rem;"><strong>Next article:</strong> <a href="article-2.html">How to make your first $1,000 with AI as a solo founder →</a></p>
+    </div>
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>⚡ <strong>HustlForge</strong> — Built for solo founders.</p>
+  </div>
+</footer>
+</body>
+</html>
+'@ | Out-File -FilePath "article-1.html" -Encoding UTF8
+
+# article-2.html
+@'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Make Your First $1,000 with AI as a Solo Founder — HustlForge</title>
+<meta name="description" content="A step-by-step playbook to hit $1k/month with AI tools in 30 days.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">⚡ HustlForge</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="articles.html">Blog</a>
+      <a href="newsletter.html">Newsletter</a>
+      <a href="ebook.html">Free Pack</a>
+    </nav>
+  </div>
+</header>
+
+<article class="post">
+  <div class="container">
+    <header class="post-header">
+      <h1>How to Make Your First $1,000 with AI as a Solo Founder</h1>
+      <p class="post-meta">June 11, 2026 · 10 min read</p>
+    </header>
+
+    <div class="post-content">
+      <p>The fastest way to make $1,000 with AI is <strong>not</strong> what gurus tell you. It'\''s not "build an audience of 100k" or "launch a SaaS." It'\''s a boring, repeatable system you can start this week.</p>
+
+      <h2>🎯 The Framework: $1k in 30 Days</h2>
+      <p>You don'\''t need $1k in profit. You need <strong>$1k in revenue</strong>, which means roughly $700-800 in profit after tool costs.</p>
+      <p>Here'\''s the formula: <strong>3-5 clients × $200-300/month = $1k.</strong></p>
+
+      <h2>Step 1: Pick ONE Service (Day 1-2)</h2>
+      <p>Don'\''t be a generalist. Pick <strong>one</strong> of these:</p>
+      <ul>
+        <li><strong>AI copywriting</strong> (emails, sales pages, ads)</li>
+        <li><strong>AI-powered video editing</strong> for creators</li>
+        <li><strong>AI automation consulting</strong> for small businesses</li>
+        <li><strong>AI-generated social media content</strong> (carousels, posts, scripts)</li>
+        <li><strong>AI prompt engineering</strong> as a service</li>
+      </ul>
+      <p>Pick the one you could deliver to a stranger by Friday.</p>
+
+      <h2>Step 2: Build 3 Portfolio Pieces (Day 3-4)</h2>
+      <p>You don'\''t need clients to have a portfolio. Do 3 free projects:</p>
+      <ol>
+        <li><strong>Pick a real business.</strong> Local restaurant, e-commerce store, SaaS founder on Twitter.</li>
+        <li><strong>Spend 2 hours</strong> using AI tools to create something valuable.</li>
+        <li><strong>Send it to them.</strong> Don'\''t ask for money. Ask for feedback.</li>
+      </ol>
+
+      <h2>Step 3: Reach Out to 30 People (Day 5-7)</h2>
+      <p>DM, email, comment. Use this template:</p>
+      <blockquote>"Hey [name], I just built [thing] for free for [business type]. Took me 2 hours with AI. Happy to do something similar for you — no strings. Worth a 15-min call?"</blockquote>
+      <p><strong>Conversion rate:</strong> 10-20%. So 30 outreach = 3-6 clients.</p>
+
+      <h2>Step 4: Charge From Day 8</h2>
+      <p>For your first 3 clients:</p>
+      <ul>
+        <li><strong>$200-300/month</strong> for a recurring service</li>
+        <li><strong>$100-150</strong> for a one-off project</li>
+        <li>Always include a "rush" option (50% extra for 24h delivery)</li>
+      </ul>
+
+      <h2>Step 5: Systematize (Day 15-30)</h2>
+      <p>Once you have 2-3 clients, build a system:</p>
+      <ul>
+        <li><strong>Templates</strong> for common requests (re-use AI prompts)</li>
+        <li><strong>Loom videos</strong> instead of calls (save 5h/week)</li>
+        <li><strong>Auto-billing</strong> via Stripe or Brevo</li>
+        <li><strong>Monthly check-ins</strong> to upsell</li>
+      </ul>
+
+      <h2>📊 Real Numbers</h2>
+      <ul>
+        <li>Week 1: 0 clients, $0, 0 hours</li>
+        <li>Week 2: 2 clients, $400, 8 hours</li>
+        <li>Week 3: 4 clients, $1,000, 12 hours</li>
+        <li>Week 4: 5 clients, $1,500, 10 hours</li>
+      </ul>
+
+      <h2>🚀 The Real Shortcut</h2>
+      <p>The fastest path is <strong>picking a niche that already spends money</strong> on the service you'\''re offering with AI:</p>
+      <ul>
+        <li>Coaches spending $2k/mo on content</li>
+        <li>E-com brands spending $5k/mo on ads</li>
+        <li>SaaS founders spending $10k/mo on copy</li>
+      </ul>
+      <p>You'\''re not selling AI. You'\''re selling <strong>10x output at the same price.</strong></p>
+
+      <div class="newsletter-box">
+        <h2>📬 Want More Like This?</h2>
+        <p>Get 1 tactical AI play every Friday. Free forever.</p>
+        <a href="newsletter.html" class="btn">Join the Newsletter</a>
+      </div>
+
+      <p style="text-align:center;margin-top:2rem;"><strong>Related:</strong> <a href="article-1.html">← 20 Best AI Tools to Start a One-Person Business</a></p>
+    </div>
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>⚡ <strong>HustlForge</strong> — Built for solo founders.</p>
+  </div>
+</footer>
+</body>
+</html>
+'@ | Out-File -FilePath "article-2.html" -Encoding UTF8
+
+# newsletter.html
+@'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newsletter — HustlForge</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">⚡ HustlForge</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="articles.html">Blog</a>
+      <a href="newsletter.html">Newsletter</a>
+      <a href="ebook.html">Free Pack</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container" style="padding: 3rem 1.5rem;">
+  <div class="newsletter-box">
+    <h2>📬 Join The HustlForge Weekly</h2>
+    <p>1 tactical AI play, 1 tool review, 1 prompt worth stealing. Every Friday. Free forever.</p>
+    <form action="#" method="post" style="display:flex;gap:0.5rem;max-width:420px;margin:0 auto;flex-wrap:wrap;">
+      <input type="email" name="EMAIL" placeholder="your@email.com" required style="flex:1;min-width:200px;padding:0.85rem 1rem;border:none;border-radius:8px;font-size:1rem;">
+      <button type="submit" class="btn" style="background:white;color:#7c3aed;">Subscribe</button>
+    </form>
+    <p style="font-size:0.85rem;margin-top:1rem;opacity:0.85;">No spam. Unsubscribe anytime.</p>
+  </div>
+
+  <h2 style="text-align:center;margin: 3rem 0 1rem;">What You'\''ll Get Every Friday</h2>
+  <div class="features">
+    <div class="feature">
+      <h3>🎯 1 Tactical Play</h3>
+      <p>A specific tactic you can ship this weekend to grow your AI side hustle.</p>
+    </div>
+    <div class="feature">
+      <h3>🛠️ 1 Tool Review</h3>
+      <p>Honest review of an AI tool, with use cases and pricing. No affiliate fluff.</p>
+    </div>
+    <div class="feature">
+      <h3>⚡ 1 Prompt Worth Stealing</h3>
+      <p>A battle-tested prompt you can copy-paste and use immediately.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>⚡ <strong>HustlForge</strong> — Built for solo founders.</p>
+  </div>
+</footer>
+</body>
+</html>
+'@ | Out-File -FilePath "newsletter.html" -Encoding UTF8
+
+# ebook.html
+@'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free AI Starter Pack — HustlForge</title>
+<meta name="description" content="50 battle-tested prompts to launch your first AI side hustle this weekend.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">⚡ HustlForge</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="articles.html">Blog</a>
+      <a href="newsletter.html">Newsletter</a>
+      <a href="ebook.html">Free Pack</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>⚡ The Free AI Starter Pack</h1>
+    <p class="lead">50 battle-tested prompts + a one-page workflow to launch your first AI side hustle this weekend.</p>
+    <a href="newsletter.html" class="btn">Download Free (Instant Access)</a>
+  </div>
+</section>
+
+<main class="container">
+  <h2 style="text-align:center;margin: 3rem 0 1rem;">What'\''s Inside</h2>
+  <div class="features">
+    <div class="feature">
+      <h3>🎯 50 Prompts</h3>
+      <p>For writing, marketing, product, sales — copy-paste and ship.</p>
+    </div>
+    <div class="feature">
+      <h3>📋 Workflow Template</h3>
+      <p>A one-page Notion template to run your AI side hustle in 1 hour/day.</p>
+    </div>
+    <div class="feature">
+      <h3>💰 Monetization Map</h3>
+      <p>5 proven ways to turn AI output into real revenue, ranked by speed.</p>
+    </div>
+    <div class="feature">
+      <h3>🚀 Launch Checklist</h3>
+      <p>A 7-day checklist to go from zero to your first $100 with AI.</p>
+    </div>
+  </div>
+
+  <div class="newsletter-box" style="margin-top:3rem;">
+    <h2>Ready to Ship Your AI Side Hustle?</h2>
+    <p>Join 1,000+ solo founders getting tactical AI plays every Friday. Free.</p>
+    <a href="newsletter.html" class="btn">Join the Newsletter</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>⚡ <strong>HustlForge</strong> — Built for solo founders.</p>
+  </div>
+</footer>
+</body>
+</html>
+'@ | Out-File -FilePath "ebook.html" -Encoding UTF8
+
+# README + .gitignore
+@'
+# HustlForge
+A static site for AI-powered solo founders.
+Live: https://personaanima.github.io
+'@ | Out-File -FilePath "README.md" -Encoding UTF8
+
+@'
+.DS_Store
+Thumbs.db
+'@ | Out-File -FilePath ".gitignore" -Encoding UTF8
+
+Write-Host ""
+Write-Host "✅ HustlForge site generated at: $folder" -ForegroundColor Green
+Write-Host ""
+Write-Host "📁 Files created:" -ForegroundColor Cyan
+Get-ChildItem $folder | ForEach-Object { Write-Host "   - $($_.Name)" }
+Write-Host ""
+Write-Host "📤 Next steps:" -ForegroundColor Yellow
+Write-Host "   1. Open the folder: explorer $folder"
+Write-Host "   2. Create a GitHub repo: https://github.com/new (name: personaanima.github.io)"
+Write-Host "   3. Drag & drop all files to GitHub (Add file > Upload files)"
+Write-Host "   4. Settings > Pages > Source: Deploy from branch > main / (root)"
+Write-Host "   5. Wait 2 min, then visit: https://personaanima.github.io"
+Write-Host ""
